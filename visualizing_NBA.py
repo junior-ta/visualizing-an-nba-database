@@ -270,23 +270,35 @@ plt.show()
 
 
 #7 prompt: Produce a csv file with the most recurrent matchups of the season
+
+#create an empty dataframe with the desired columns
 df=pd.DataFrame(columns=['name','matchup','time','pts'])
 
 players= matchupsData['ofplayer'].unique()
 i=0
 
 
+#extract the list of unique players that played during this season
+players= matchupsData['ofplayer'].unique()
+i=0
+
+#iterating every player and isolationg all their matchups data in a new data frame
 for player in players:
     playerLoc= matchupsData[matchupsData['ofplayer']==player]
 
+#extract the list of unique players the actual player (iteration) had a matchup against
     playerMatchups= playerLoc['deplayer'].unique()
 
+#iterating every player from the matchups list and finding the sum of the matchup time and of the points scored
     for matchup in playerMatchups:
         matchupTime= playerLoc[playerLoc['deplayer']==matchup]['matchupSEC'].sum()
         matchupPts= playerLoc[playerLoc['deplayer']==matchup]['playerPTS'].sum()
 
+#appending each matchup total stats to the pre-created dataframe
         df.loc[i]=[player,matchup,matchupTime,matchupPts]
         i+=1
 
 df
-df.sort_values('time',ascending=False).to_csv("most recurrent matchups (from prompt7).csv",index=False)
+#df[df["name"]=="Joel Embiid"].sort_values('pts', ascending=False)
+#df.sort_values('time',ascending=False)
+#df.sort_values('time',ascending=False).to_csv("most recurrent matchups (from prompt7).csv",index=False)
