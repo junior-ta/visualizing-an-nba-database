@@ -9,6 +9,8 @@ basic= pd.read_csv(r"C:\Users\ttjrb\OneDrive\Desktop\University Important\summer
 advanced=pd.read_csv(r"C:\Users\ttjrb\OneDrive\Desktop\University Important\summer 2024 work\projects\databases\ALL 1320 nba games 2022-23\advanced.csv",usecols=('USGpct','DEFRTG'))
 gamesData=pd.read_csv(r"C:\Users\ttjrb\OneDrive\Desktop\University Important\summer 2024 work\projects\databases\ALL 1320 nba games 2022-23\games.csv")
 matchupsData=pd.read_csv(r"C:\Users\ttjrb\OneDrive\Desktop\University Important\summer 2024 work\projects\databases\ALL 1320 nba games 2022-23\matchups.csv")
+teamsAdvanced=pd.read_csv(r"C:\Users\ttjrb\OneDrive\Desktop\University Important\summer 2024 work\projects\databases\ALL 1320 nba games 2022-23\team_advanced.csv")
+
 
 #prompt1: Showing the top K leaders in a particular stat on a bar chart
 df=pd.concat([basic,advanced], axis=1)
@@ -53,44 +55,45 @@ def topKLeader(category,K):
 
 
 #prompt 2: Displaying the top 5 NBA leaders for all the stats requested by the user
-categories= ['SEC','FGpct','3PM','3Ppct','FTM','FTpct','ORB','TRB','AST','STL','BLK','TOV','PTS','plusminusPTS','USGpct','DEFRTG']
-displayedCategories=[]
+def top5NStats():
+    categories= ['SEC','FGpct','3PM','3Ppct','FTM','FTpct','ORB','TRB','AST','STL','BLK','TOV','PTS','plusminusPTS','USGpct','DEFRTG']
+    displayedCategories=[]
+    
+    while True:
+        category= input('''Enter the stats category (Press Q when you are done)
+        #Input options: 
+        'SEC'= Time played(in Seconds),
+        'FGpct'= field goal percentage,
+        '3PM'= 3pts made,
+        '3Ppct'= 3pts percentage,
+        'FTM'= Free throw made,
+        'FTpct'=Free throw percentage,
+        'ORB'=offensive rebound,
+        'TRB'=rebounds,
+        'AST'= Assists,
+        'STL'= Steal,
+        'BLK'= Block,
+        'TOV'= Turnovers,
+        'PTS'= Points,
+        'plusminusPTS'= box plus minus,
+        'USGpct'= Usage percentage,
+        'DEFRTG'= Defensive rating''')
 
-while True:
-   category= input('''Enter the stats category (Press Q when you are done)
-   #Input options: 
-   'SEC'= Time played(in Seconds),
-   'FGpct'= field goal percentage,
-   '3PM'= 3pts made,
-   '3Ppct'= 3pts percentage,
-   'FTM'= Free throw made,
-   'FTpct'=Free throw percentage,
-   'ORB'=offensive rebound,
-   'TRB'=rebounds,
-   'AST'= Assists,
-   'STL'= Steal,
-   'BLK'= Block,
-   'TOV'= Turnovers,
-   'PTS'= Points,
-   'plusminusPTS'= box plus minus,
-   'USGpct'= Usage percentage,
-   'DEFRTG'= Defensive rating''')
-
-   if category.lower()=='q':
-      break
-   if category in categories:
-      displayedCategories.append(category)
-   else:
-      print("enter a valid stat")
+        if category.lower()=='q':
+            break
+        if category in categories:
+            displayedCategories.append(category)
+        else:
+            print("enter a valid stat")
 
 
-for category in displayedCategories:
-   statsSorted= p1.playersAvg.sort_values(category,ascending=False)
-   print("Top 5  "+category+" players in the NBA:")
-   print(statsSorted.head())
-   print("\n"+"\n")
+    for category in displayedCategories:
+        statsSorted= p1.playersAvg.sort_values(category,ascending=False)
+        print("Top 5  "+category+" players in the NBA:")
+        print(statsSorted.head())
+        print("\n"+"\n")
 
-print('THANK YOU FOR USING MY SERVICE, BYE.') 
+    print('THANK YOU FOR USING MY SERVICE, BYE.') 
 
 
 
@@ -253,6 +256,8 @@ def statsFrequency(category,value):
 n=len(teamsAdvanced)
 split=n//4
 
+#creating 2 lists for the data visualization, one with the average for a percentage of the season and another one with the given percentage of the season
+percentage=["25%","50%","75%","100%"]
 splitn=[teamsAdvanced.iloc[:split],teamsAdvanced.iloc[split:(2*split)], teamsAdvanced.iloc[(2*split):(3*split)], teamsAdvanced.iloc[(3*split):]]
 paceList=[]
 
