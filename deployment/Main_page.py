@@ -1,13 +1,5 @@
-#import pandas as pd
-#import csv
-#import matplotlib.pyplot as plt
-#import os
 import streamlit as st
 
-#import base64
-#import numpy as np
-#import seaborn as sns
-#import statsmodels.formula.api as smf
 
 #Heading
 st.title('My NBA Data Analysis Studies')
@@ -16,18 +8,19 @@ st.markdown("""
 This app is used to show the results of my data analysis findings, my data explorer/visualizations and many more
 * **Contact me:** juniorta@buffalo.edu / ttjrbiz@gmail.com
 * **Data source:** Kaggle datasets: https://www.kaggle.com/datasets/szymonjwiak/nba-2022-2023-advanced-boxscores
+
+    Basketball reference: https://www.basketball-reference.com/
 """)
 
 #Spacing
 for i in range(3):
     st.markdown("")
 
-#body
+
+#.........................body..............................................
+
 #ME
 st.subheader('Me!!!', divider="gray")
-import streamlit as st
-
-
 col1, col2 = st.columns(2)
 
 with col1:
@@ -37,8 +30,17 @@ with col2:
     st.page_link("deployment/Project's_stack.py", label="Project's stack", icon=":material/layers:")
 
 
-#Data prompts
-st.subheader('Data extraction and visualization', divider="grey")
+#Recent
+st.subheader('Recent!!!', divider="gray")
+p10, p11= st.columns(2)
+
+with p10:
+    st.page_link("deployment/page_10_prompt.py", label="Evolution of Team's Offense in the past 5 years")
+
+
+
+#OLD Data prompts
+st.subheader('Old stuff', divider="grey")
 p1, p2, p3 = st.columns(3)
 p4, p5, p6 = st.columns(3)
 
